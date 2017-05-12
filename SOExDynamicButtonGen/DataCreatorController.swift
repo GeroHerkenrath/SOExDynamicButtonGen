@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DataCreatorController.swift
 //  SOExDynamicButtonGen
 //
 //  Created by Ghost in the Shell on 12.05.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DataCreatorController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -20,6 +20,8 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+	@IBAction func doDynamic(_ sender: Any) {
+	}
 
 }
 
