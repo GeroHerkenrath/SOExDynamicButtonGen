@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3O7-Rl-Wrs">
-                                <rect key="frame" x="112" y="279" width="150" height="108"/>
+                                <rect key="frame" x="112.5" y="279.5" width="150" height="108"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hyb-EV-UXU">
                                         <rect key="frame" x="20" y="58" width="110" height="30"/>
@@ -122,7 +122,7 @@
         <!--Second Level Controller-->
         <scene sceneID="3El-sv-Zld">
             <objects>
-                <collectionViewController id="xvf-ZT-0fs" customClass="SecondLevelController" customModule="SOExDynamicButtonGen" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="secondLevelController" id="xvf-ZT-0fs" customClass="SecondLevelController" customModule="SOExDynamicButtonGen" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Tf-X2-Dey">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Xs-1a-6l8">
-                                <rect key="frame" x="166" y="72" width="42" height="21"/>
+                                <rect key="frame" x="166.5" y="72" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
