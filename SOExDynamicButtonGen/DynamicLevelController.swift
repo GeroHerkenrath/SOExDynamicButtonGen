@@ -2,94 +2,65 @@
 //  DynamicLevelController.swift
 //  SOExDynamicButtonGen
 //
-//  Created by Ghost in the Shell on 12.05.17.
+//  Created by Gero Herkenrath on 12.05.17.
 //  Copyright © 2017 Gero Herkenrath. All rights reserved.
 //
 
 import UIKit
 
-class DynamicLevelController: UITableViewController {
+// general note about instantiating and pushing manually here:
+// I played around a bit with cyclic segues a bit (i.e. a segues targeting the same view controller it starts in), but
+// the way interface builder works seems to indicate that this is "not recommended". It works if the segues comes
+// from a table cell, but you can't just create a "manual" segues like this, i.e. a segues that is not started
+// by a specific UI element like a cell or button, but just belongs to the view controller itself.
+// This is fine if you ALWAYS target the same view controller, but if you want to keep a collection of segues
+// around, one of which is self-targeting and the others target different view controllers that doesn't work.
+// In this case you'd have to have multiple prototype cells, one with the self-targeting segue and some with the others
+// or none. I guess this is confusing enough to read, so the resulting code is probably messy and ugly, too.
+// I'd advise against this.
 
+
+class DynamicLevelController: UITableViewController {
+	
+	var mySubtree = OptionNode(value: "")
+	// I am using a "stupid" init value to avoid an optional and clutter the code here
+	// also, it *is*, in a way, a meaningful default, because I need something to display
+	// In the app, right after this VC is instantiated, but before its view is shown, 
+	// the presenting controller sets this to the correct node
+
+	@IBOutlet weak var sectionHeader: UILabel!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+		sectionHeader.text = mySubtree.value
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+		return mySubtree.children.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dynamicCell", for: indexPath)
+		if let view = cell.viewWithTag(1) as? UILabel {
+			view.text = mySubtree.children[indexPath.row].value
+		}
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		// same as before...
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		if let dynVC = storyboard.instantiateViewController(withIdentifier: "dynamicLevelController") as? DynamicLevelController {
+			// but this time, we give our relevant child!
+			dynVC.mySubtree = self.mySubtree.children[indexPath.row]
+			self.navigationController?.pushViewController(dynVC, animated: true)
+		}
+	}
+	
 }

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SOExDynamicButtonGen
 //
-//  Created by Ghost in the Shell on 12.05.17.
+//  Created by Gero Herkenrath on 12.05.17.
 //  Copyright © 2017 Gero Herkenrath. All rights reserved.
 //
 
